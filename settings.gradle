@@ -1,0 +1,5 @@
+rootProject.name = 'mMenus'
+include 'menus-spigot'
+include 'menus-minestom'
+include 'menus-common'
+

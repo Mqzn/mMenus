@@ -1,0 +1,7 @@
+main: dev.mqzen.menus.spigot.test.ExamplePlugin
+version: 1.0
+name: mMenus
+commands:
+  tg:
+
+

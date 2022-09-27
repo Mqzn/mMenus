@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+
+}
+
+plugins.apply('java')
+plugins.apply('com.github.johnrengelman.shadow')
+
+
+group 'dev.mqzen.menus'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation project(":menus-common")
+    compileOnly('org.projectlombok:lombok:1.18.24')
+    annotationProcessor('org.projectlombok:lombok:1.18.24')
+    compileOnly 'org.checkerframework:checker-qual:3.25.0'
+    compileOnly("org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT")
+}
+
+shadowJar {
+    setArchiveName("mMenus-Spigot-${project.version}.jar")
+    exclude 'META-INF/**'
+    exclude 'LICENSE'
+}
