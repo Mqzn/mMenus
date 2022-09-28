@@ -9,7 +9,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +21,14 @@ public abstract class SpigotMenuAdapter implements MenuAdapter<Player, ItemStack
 		this.size = size;
 		this.items = new HashMap<>();
 		setMenuItems();
+	}
+
+	protected SpigotMenuAdapter(int rows) {
+		this(MenuSize.of(rows));
+	}
+
+	protected SpigotMenuAdapter(int rows, int columns) {
+		this(MenuSize.of(rows, columns));
 	}
 
 	@Override

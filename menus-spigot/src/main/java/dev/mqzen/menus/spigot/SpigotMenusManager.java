@@ -11,7 +11,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.AnvilInventory;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -48,7 +51,6 @@ public final class SpigotMenusManager extends MenusManager<Plugin, Player,
 	@EventHandler
 	public void onClick(InventoryClickEvent e) {
 
-		debug("On Click event triggered !");
 		Player player = (Player) e.getWhoClicked();
 
 		int slot = e.getSlot();
@@ -56,25 +58,15 @@ public final class SpigotMenusManager extends MenusManager<Plugin, Player,
 			return;
 		}
 
-		debug("On Click at slot = " + slot);
-
 		val menu =  this.getOpenMenu(player);
-		if(menu == null) {
-			debug("Menus is null");
-			debug("Menus size= " + getOpenMenus().size());
-			e.setCancelled(true);
+		if(menu == null)
 			return;
-		}
+
 
 		SlotPosition position = SlotPosition.fromSlot(menu.size(), slot);
-		platform.getLogger().info("Slot: " + slot + ", Position = " + position.getRow() + ":" + position.getColumn());
 		val clickableItem =  menu.getItemAt(position);
-		if(clickableItem == null){
-			platform.getLogger().info("Clicked item in slot: " + slot + ", is NULL");
-			e.setCancelled(true);
-			return;
-		}
-		debug("EXECUTING THE CLICK IN SLOT : "+ slot);
+		if(clickableItem == null) return;
+
 		clickableItem.executeOnClick(e);
 
 		e.setCancelled(true);
@@ -88,6 +80,19 @@ public final class SpigotMenusManager extends MenusManager<Plugin, Player,
 			menu.onClose(player);
 		}
 
+		if(menu instanceof SpigotMenuPage) {
+
+			SpigotMenuPage menuPage = (SpigotMenuPage) menu;
+			if(!menuPage.getPaginatedMenu().isOpeningPage(player.getUniqueId())) {
+				menuPage.getPaginatedMenu().clean();
+				this.openMenus.remove(player);
+			}
+
+
+			return;
+		}
+
+		this.openMenus.remove(player);
 	}
 
 	@EventHandler

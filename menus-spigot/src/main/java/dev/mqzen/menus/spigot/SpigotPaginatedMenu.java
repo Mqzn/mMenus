@@ -28,10 +28,13 @@ public abstract class SpigotPaginatedMenu extends PaginatedMenu<Plugin, Player, 
 			return;
 		}
 
-		user.closeInventory();
+		if(opened) {
+			pageOpeners.add(user.getUniqueId());
+		}
+		opened = true;
 
 		Bukkit.getScheduler().runTaskLater(manager.getPlatform(),
-						()-> manager.openMenu(user, page), 2L);
+						()-> manager.openMenu(user, page), 1L);
 
 	}
 

@@ -11,7 +11,7 @@ import org.bukkit.plugin.Plugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public abstract class SpigotMenuPage extends MenuPage<Plugin, Player, ItemStack, InventoryClickEvent> {
+public final class SpigotMenuPage extends MenuPage<Plugin, Player, ItemStack, InventoryClickEvent> {
 
 	private @MonotonicNonNull Inventory pageInventory;
 	public SpigotMenuPage(@NonNull Player user,
@@ -26,29 +26,21 @@ public abstract class SpigotMenuPage extends MenuPage<Plugin, Player, ItemStack,
 	@Override
 	protected ClickableItem<ItemStack, InventoryClickEvent> getPreviousPageButton() {
 
-
-		return SpigotClickableItem.of(this.getPreviousPageItemStack(), (e)-> {
-			if(previousPage != null) {
-				Player user = (Player) e.getWhoClicked();
-				manager.openMenu(user, previousPage);
-			}
+		return SpigotClickableItem.of(pageCreator.getPreviousPageItemStack(), (e)-> {
+			Player user = (Player) e.getWhoClicked();
+			paginatedMenu.open(user, this.page-2);
 		});
+
 	}
 
 	@Override
 	protected ClickableItem<ItemStack, InventoryClickEvent> getNextPageButton() {
-		return SpigotClickableItem.of(this.getNextPageItemStack(), (e)-> {
-			if(nextPage != null) {
-				Player user = (Player) e.getWhoClicked();
-				manager.openMenu(user, nextPage);
-			}
+		return SpigotClickableItem.of(pageCreator.getNextPageItemStack(), (e)-> {
+			Player user = (Player) e.getWhoClicked();
+			paginatedMenu.open(user, this.page+2);
 		});
 
 	}
-
-	protected abstract ItemStack getNextPageItemStack();
-
-	protected abstract ItemStack getPreviousPageItemStack();
 
 	/**
 	 * This is where  the inventory object is
@@ -75,19 +67,8 @@ public abstract class SpigotMenuPage extends MenuPage<Plugin, Player, ItemStack,
 
 	@Override
 	public final void open(Player user) {
-
-		int page = getPage();
-		if(page-1 >= 0) {
-			previousPage = pageCreator.createNewPage(user,page-1, paginatedMenu);
-		}
-
-		if(page+1 < paginatedMenu.maximumPages()) {
-			nextPage = pageCreator.createNewPage(user, page+1, paginatedMenu);
-		}
-
-		if(pageInventory != null) {
+		if (pageInventory != null)
 			user.openInventory(pageInventory);
-		}
 
 	}
 
