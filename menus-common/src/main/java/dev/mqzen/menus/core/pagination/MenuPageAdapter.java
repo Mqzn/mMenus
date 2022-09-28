@@ -35,20 +35,16 @@ public final class MenuPageAdapter<P, U, I, E> implements MenuAdapter<U, I ,E> {
 		int start = page*paginatedMenu.getItemsPerPage();
 		int end = (page+1)*paginatedMenu.getItemsPerPage();
 
-		System.out.println("-------------------------------");
-		System.out.println("PAGE #" + page);
 		int i = 0;
 		for (int index = start; index < end; index++) {
 			try {
 				SlotPosition position = iterator.next();
-				System.out.println("> Index= " + index + ", Position= " + position.getRow() + ":" + position.getColumn() + ", Order=" + i);
 				items.put(position, paginatedMenu.getItemAt(index));
 			}catch (Exception ex){
 				break;
 			}
 			i++;
 		}
-		System.out.println("-------------------------------");
 
 	}
 

@@ -2,7 +2,6 @@ package dev.mqzen.menus.core.pagination;
 
 import dev.mqzen.menus.core.*;
 import lombok.Getter;
-import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -10,15 +9,14 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 public abstract class MenuPage<P, U, I, E> implements Menu<U, I, E> {
 
 	protected final @NonNull MenusManager<P, U, I, E, ?> manager;
-
 	protected final @NonNull PageCreator<P, U, I, E, ?> pageCreator;
-
 	protected final @NonNull PaginatedMenu<P, U, I, E> paginatedMenu;
-	private final int page;
 	protected final @NonNull MenuPageAdapter<P, U, I, E> adapter;
 	private final @NonNull ClickableItem<I, E> next, prev;
 
-	protected @MonotonicNonNull MenuPage<P, U, I, E> previousPage = null, nextPage = null;
+	protected final int page;
+
+	//protected @MonotonicNonNull MenuPage<P, U, I, E> previousPage = null, nextPage = null;
 
 	public MenuPage(@NonNull U user, int page,
 	                @NonNull PaginatedMenu<P, U, I, E> paginatedMenu,

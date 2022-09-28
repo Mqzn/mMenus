@@ -1,5 +1,8 @@
-package dev.mqzen.menus.core;
+package dev.mqzen.menus.core.pagination;
 
+import dev.mqzen.menus.core.ClickableItem;
+import dev.mqzen.menus.core.MenuAdapter;
+import dev.mqzen.menus.core.SlotPosition;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -13,7 +16,7 @@ import java.util.function.Predicate;
  * @param <I> The Item type
  * @param <E> The event that will be triggered when clicking in the gui
  */
-public final class MenuIterator<U, I, E> {
+final class MenuIterator<U, I, E> {
 
 	private final @NonNull MenuAdapter<U, I, E> menu;
 	private final @NonNull Type type;

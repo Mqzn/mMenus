@@ -12,6 +12,10 @@ public final class MenuSize {
 
 	private int rows, columns = 9;
 
+	public static MenuSize of(int rows) {
+		return new MenuSize(rows, 9);
+	}
+
 	public MenuSize addRows(int rowsToAdd) {
 		rows+=rowsToAdd;
 		return this;

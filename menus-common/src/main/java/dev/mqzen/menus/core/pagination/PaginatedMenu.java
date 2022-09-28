@@ -14,6 +14,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class PaginatedMenu<P, U, I, E> {
 
+	protected boolean opened = false;
+
 	private final @NonNull ConcurrentHashMap<Integer, MenuPage<P, U, I, E>> pages = new ConcurrentHashMap<>();
 	protected final @NonNull List<ClickableItem<I, E>> items = new ArrayList<>();
 	protected final @Getter int itemsPerPage;
@@ -89,17 +91,10 @@ public abstract class PaginatedMenu<P, U, I, E> {
 		return pageOpeners.contains(uuid);
 	}
 
-	void addOpener(UUID uuid) {
-		pageOpeners.add(uuid);
-	}
-
-	void removeOpener(UUID uuid) {
-		pageOpeners.remove(uuid);
-	}
-
 	public abstract void open(U user, int pointingPage);
 
 	public final void clean() {
+		manager.debug("Cleaning...");
 		pages.clear();
 		items.clear();
 		pageOpeners.clear();

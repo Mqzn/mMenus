@@ -12,6 +12,11 @@ public abstract class PageCreator<P, U, I, E, MP extends MenuPage<P ,U ,I, E>> {
 	}
 
 	public abstract void setAdditionalItems(U user, MenuPageAdapter<P, U, I, E> pageAdapter);
+
+	public abstract I getNextPageItemStack();
+
+	public abstract I getPreviousPageItemStack();
+
 	public abstract MP createNewPage(@NonNull U user, int pageIndex, PaginatedMenu<P, U, I, E> paginatedMenu);
 
 }
