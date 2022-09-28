@@ -259,6 +259,9 @@ public class ExamplePlugin extends JavaPlugin {
 }
 ```
 
+## Results
+
+
 ## Big Thanks
 Thanks for giving mMenus some of your time, I really hope it may be
 useful for you in the future when making a lot of guis with complicated items
