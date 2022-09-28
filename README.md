@@ -18,7 +18,7 @@ practicing the past 3 years.
 
 ## Installation
 Sorrowfully, mMenus can be installed as a dependency using the old plain way
-by just downloading the jar from [here](./), 
+by just downloading the jar from [here](https://github.com/Mqzn/mMenus/releases/tag/1.0.0-DEV), 
 or you can add it as a system dependency in your pom.xml(maven) or build.gradle(gradle)
 
 ## Usage Tutorial
