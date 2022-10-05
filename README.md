@@ -273,4 +273,4 @@ make even more powerful algorithms to make our life much easier.
 
 Note: I wrote this code by my self from A to Z.
 This is my discord for any issues/bugs that you may encounter
-My discord: **Mqzen#9999**
+My discord: **Dr.Mqzen#9999**
